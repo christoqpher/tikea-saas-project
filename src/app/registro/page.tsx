@@ -40,8 +40,16 @@ export default function RegistroPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-4 py-12">
-      <div className="w-full max-w-sm">
+    <main className="landing relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-12">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(55% 45% at 50% 0%, rgba(255,87,26,0.14), transparent 70%)",
+        }}
+      />
+      <div className="relative w-full max-w-sm">
         <div className="mb-8 text-center">
           <Link
             href="/"
@@ -59,7 +67,7 @@ export default function RegistroPage() {
 
         <form
           onSubmit={onSubmit}
-          className="space-y-4 rounded-2xl border border-outline-variant/30 bg-surface p-6"
+          className="space-y-4 rounded-2xl glass p-6 shadow-2xl"
         >
           <GoogleSignInButton label="Registrarme con Google" />
           <div className="flex items-center gap-3">
