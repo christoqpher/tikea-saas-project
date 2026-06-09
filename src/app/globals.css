@@ -1,0 +1,476 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Tikea — layout original (Google Stitch "Obsidian") retematizado con
+  los COLORES y la TIPOGRAFÍA de Open Design ("Atelier Zero"):
+  papel crema, tinta, acento coral; Inter Tight (titulares) + Playfair Display
+  (acentos en cursiva) + Inter (cuerpo) + JetBrains Mono.
+*/
+@theme inline {
+  /* Fuentes (cargadas vía next/font en layout.tsx) */
+  --font-sans: var(--font-inter);
+  --font-body: var(--font-inter);
+  --font-display: var(--font-inter-tight);
+  --font-heading: var(--font-inter-tight);
+  --font-serif: var(--font-playfair);
+  --font-mono: var(--font-jetbrains);
+
+  /* --- Tipografía (escala original de la referencia) --- */
+  --text-display-lg: 3rem; /* 48px */
+  --text-display-lg--line-height: 1.05;
+  --text-display-lg--letter-spacing: -0.03em;
+  --text-display-lg--font-weight: 800;
+
+  --text-headline-md: 2rem; /* 32px */
+  --text-headline-md--line-height: 1.15;
+  --text-headline-md--letter-spacing: -0.02em;
+  --text-headline-md--font-weight: 700;
+
+  --text-headline-sm: 1.5rem; /* 24px */
+  --text-headline-sm--line-height: 1.25;
+  --text-headline-sm--letter-spacing: -0.015em;
+  --text-headline-sm--font-weight: 700;
+
+  --text-body-lg: 1.125rem; /* 18px */
+  --text-body-lg--line-height: 1.6;
+
+  --text-body-md: 1rem; /* 16px */
+  --text-body-md--line-height: 1.6;
+
+  --text-label-md: 0.875rem; /* 14px */
+  --text-label-md--line-height: 1.2;
+  --text-label-md--letter-spacing: 0.04em;
+  --text-label-md--font-weight: 600;
+
+  --text-label-sm: 0.75rem; /* 12px */
+  --text-label-sm--line-height: 1.2;
+  --text-label-sm--font-weight: 500;
+
+  /* --- Superficies (referencian vars para permitir el tema oscuro de la
+     landing mediante `.landing` sin afectar a la app interna, que es clara) --- */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+
+  /* --- Texto / contornos --- */
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  /* --- Acentos primarios --- */
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-on-primary-fixed: var(--on-primary-fixed);
+
+  /* Tokens semánticos de shadcn (Button / Card / Input) */
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* La app es modo claro (papel). Tokens semánticos de shadcn alineados a la
+   paleta de Open Design para que Button / Card / Input combinen. */
+:root {
+  --background: #efe7d2;
+  --foreground: #15140f;
+  --card: #f7f1de;
+  --card-foreground: #15140f;
+  --popover: #f7f1de;
+  --popover-foreground: #15140f;
+  --primary: #ed6f5c;
+  --primary-foreground: #ffffff;
+  --secondary: #ddd2b6;
+  --secondary-foreground: #15140f;
+  --muted: #ece4cf;
+  --muted-foreground: #5a5448;
+  --accent: #e9b94a;
+  --accent-foreground: #15140f;
+  --destructive: #c0392b;
+  --border: #b9ad8d;
+  --input: #cabf9f;
+  --ring: #ed6f5c;
+  --radius: 0.75rem;
+
+  /* Superficies/texto/acentos de la app (modo claro "papel"). La landing los
+     sobrescribe en `.landing` para su tema oscuro. */
+  --surface: #f7f1de;
+  --surface-container-lowest: #efe7d2;
+  --surface-container-low: #f2ead6;
+  --surface-container: #ece4cf;
+  --surface-container-high: #e4dabf;
+  --surface-container-highest: #ddd2b6;
+  --on-surface: #15140f;
+  --on-surface-variant: #3a352b;
+  --outline: #6b6655;
+  --outline-variant: #b9ad8d;
+  --primary-container: #f08e7c;
+  --primary-fixed-dim: #f3a392;
+  --on-primary-fixed: #ffffff;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Tema OSCURO de la landing (estilo "hydra": negro azulado, acento cian→azul,
+   destellos). Solo aplica dentro de `.landing`; la app interna no se toca.
+   ──────────────────────────────────────────────────────────────────────────── */
+/* Fuente pixel exacta de HydraDB (Geist Pixel Square, servida por Framer). */
+@font-face {
+  font-family: "Geist Pixel Square";
+  src: url("https://framerusercontent.com/assets/m9VYcRxyyn0ZP3WI9vRSpNBosKU.woff2")
+    format("woff2");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.landing,
+.app-dark {
+  /* Paleta Tikea: negro + naranja #ff571a + amarillo #f9c425. */
+  --background: #000000;
+  --foreground: #ffffff;
+  --surface: #0a0a0a;
+  --surface-container-lowest: #000000;
+  --surface-container-low: #0d0d0d;
+  --surface-container: #121212;
+  --surface-container-high: #161616;
+  --surface-container-highest: #1c1c1c;
+  --on-surface: #ffffff;
+  --on-surface-variant: #999999;
+  --outline: #747474;
+  --outline-variant: #2e2e2e;
+  --primary: #ff571a;
+  --primary-container: #f9c425;
+  --primary-fixed-dim: #ff7a4d;
+  --on-primary-fixed: #000000;
+  --accent: #f9c425;
+  --ring: #ff571a;
+  /* Tokens shadcn (Button / Card / Input) en oscuro. */
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --popover: #0a0a0a;
+  --popover-foreground: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #161616;
+  --secondary-foreground: #ffffff;
+  --muted: #121212;
+  --muted-foreground: #999999;
+  --accent-foreground: #000000;
+  --border: #2e2e2e;
+  --input: #2e2e2e;
+  --radius: 0px; /* esquinas rectas, estilo técnico */
+  background-color: var(--background);
+  color: var(--on-surface);
+}
+
+/* Titulares con la fuente pixelada (firma de Tikea) — solo en la landing. */
+.landing .font-display {
+  font-family: "Geist Pixel Square", var(--font-display), sans-serif;
+  letter-spacing: -0.01em;
+}
+/* Dashboard: tipografía limpia (Inter Tight) en vez de la pixelada. El grosor
+   (font-bold/extrabold) y el color blanco (text-on-surface) los siguen
+   marcando las utilidades de cada componente. */
+.app-dark .font-display {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.02em;
+}
+/* Encabezados dentro de las tarjetas de gráficas: un poco más finos y con las
+   letras menos juntas, para que no se amontonen. */
+.app-dark .chart-title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+/* La mayúscula inicial estilo "hydra" solo en la landing de marketing. */
+.landing .font-display {
+  text-transform: capitalize;
+}
+/* Las palabras "acento" dejan de ser serif/cursiva: en la landing, pixel naranja. */
+.landing .font-display .italic,
+.landing .font-display.italic {
+  font-family: "Geist Pixel Square", var(--font-display), sans-serif;
+  font-style: normal;
+  color: var(--primary);
+}
+/* En el dashboard, el acento usa la fuente limpia (naranja, sin cursiva). */
+.app-dark .font-display .italic,
+.app-dark .font-display.italic {
+  font-family: var(--font-display), sans-serif;
+  font-style: normal;
+  color: var(--primary);
+}
+
+/* Cards planas (sin glass) con borde. */
+.landing .glass,
+.app-dark .glass {
+  background: #0a0a0a;
+  border: 1px solid #2e2e2e;
+}
+.landing .scan-line,
+.app-dark .scan-line {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 87, 26, 0) 0%,
+    rgba(255, 87, 26, 0.4) 50%,
+    rgba(255, 87, 26, 0) 100%
+  );
+  border-top: 1px solid rgba(255, 87, 26, 0.85);
+}
+.landing .scroll-progress {
+  background: linear-gradient(90deg, #ff571a, #f9c425);
+}
+.landing ::selection,
+.app-dark ::selection {
+  background-color: #ff571a;
+  color: #000000;
+}
+/* Pulso naranja para puntos vivos. */
+.landing .pulse-ai,
+.app-dark .pulse-ai {
+  animation: pulse-hydra 3s infinite;
+}
+@keyframes pulse-hydra {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 87, 26, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 87, 26, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 87, 26, 0);
+  }
+}
+
+/* Fondo de rejilla técnica (líneas de 32px) idéntico a HydraDB. */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, #202020 1px, transparent 1px),
+    linear-gradient(to bottom, #202020 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    @apply font-sans;
+  }
+  ::selection {
+    background-color: #ed6f5c;
+    color: #ffffff;
+  }
+  /* Acentos en cursiva → Playfair Display italic (firma tipográfica OD) */
+  .font-display .italic,
+  .font-display.italic,
+  .font-heading .italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 600;
+  }
+}
+
+/*
+  Utilidades visuales del layout original, adaptadas a fondo claro:
+  glassmorphism cálido, borde con resplandor de IA en coral y pulso coral.
+*/
+@layer components {
+  .glass {
+    background: rgba(247, 241, 222, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(21, 20, 15, 0.1);
+  }
+
+  .ai-glow-border {
+    border: 1px solid #ed6f5c;
+    box-shadow: 0 0 12px 4px rgba(237, 111, 92, 0.28);
+  }
+
+  .pulse-ai {
+    animation: pulse-ai 3s infinite;
+  }
+}
+
+@keyframes pulse-ai {
+  0% {
+    box-shadow: 0 0 0 0 rgba(237, 111, 92, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(237, 111, 92, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(237, 111, 92, 0);
+  }
+}
+
+/* ---------- animaciones de demo / dashboard ---------- */
+@keyframes scan-sweep {
+  0% { transform: translateY(-10%); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateY(1000%); opacity: 0; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bar-grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes draw-line {
+  from { stroke-dashoffset: var(--len, 1000); }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@layer components {
+  .scan-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: linear-gradient(
+      to bottom,
+      rgba(237, 111, 92, 0) 0%,
+      rgba(237, 111, 92, 0.35) 50%,
+      rgba(237, 111, 92, 0) 100%
+    );
+    border-top: 1px solid rgba(237, 111, 92, 0.8);
+    animation: scan-sweep 2.6s ease-in-out infinite;
+  }
+  .field-in {
+    opacity: 0;
+    animation: fade-up 0.5s ease forwards;
+  }
+  .bar-rise {
+    transform-origin: bottom;
+    animation: bar-grow 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+      var(--color-outline) 25%,
+      var(--color-on-surface) 50%,
+      var(--color-outline) 75%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.4s linear infinite;
+  }
+}
+
+/* ---------- scroll reveal ----------
+   El hiding solo aplica cuando JS está listo (.reveal-ready en <html>),
+   así el contenido sigue visible si JS falla o no se ejecuta. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal-ready [data-reveal="left"] { transform: translateX(-32px); }
+.reveal-ready [data-reveal="right"] { transform: translateX(32px); }
+.reveal-ready [data-reveal="scale"] { transform: scale(0.96); }
+.reveal-ready [data-reveal="fade"] { transform: none; }
+.reveal-ready [data-reveal][data-revealed="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- barra de progreso de scroll ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--color-primary), #f3a392);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ---------- línea de gráfica que se dibuja al revelarse ---------- */
+.chart-line {
+  --len: 620;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+}
+.reveal-ready [data-revealed="true"] .chart-line {
+  animation: draw-line 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+.reveal-ready :not([data-revealed="true"]) .chart-bar {
+  transform: scaleY(0);
+}
+.chart-bar {
+  transform-origin: bottom;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--bar-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-line,
+  .field-in,
+  .bar-rise,
+  .shimmer-text,
+  .pulse-ai,
+  .chart-line,
+  .chart-bar {
+    animation: none !important;
+  }
+  .field-in {
+    opacity: 1 !important;
+  }
+  .chart-line {
+    stroke-dashoffset: 0 !important;
+  }
+  .reveal-ready [data-reveal] {
+    transition: none !important;
+  }
+}
