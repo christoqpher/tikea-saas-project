@@ -91,15 +91,15 @@ export function DashboardShowcase() {
           <div className="grid gap-4 lg:grid-cols-2">
             {/* Donut categorías */}
             <div
-              className="rounded-2xl border border-outline-variant/30 bg-surface p-6"
+              className="rounded-2xl border border-outline-variant/30 bg-surface p-5 md:p-6"
               data-reveal
             >
               <p className="mb-5 text-label-md font-semibold text-on-surface">
                 Gasto por categoría
               </p>
-              <div className="flex items-center gap-6">
+              <div className="flex flex-col items-center gap-5 sm:flex-row sm:gap-6">
                 <div
-                  className="relative size-36 shrink-0 rounded-full"
+                  className="relative size-32 shrink-0 rounded-full sm:size-36"
                   style={{
                     background:
                       "conic-gradient(#ff571a 0% 34%, #f9c425 34% 58%, #ffffff 58% 76%, #999999 76% 90%, #2e2e2e 90% 100%)",
@@ -114,7 +114,7 @@ export function DashboardShowcase() {
                     </span>
                   </div>
                 </div>
-                <ul className="flex-1 space-y-2.5">
+                <ul className="w-full space-y-2.5 sm:flex-1">
                   {categories.map((c) => (
                     <li
                       key={c.label}
@@ -138,7 +138,7 @@ export function DashboardShowcase() {
 
             {/* Tendencia mensual */}
             <div
-              className="rounded-2xl border border-outline-variant/30 bg-surface p-6"
+              className="rounded-2xl border border-outline-variant/30 bg-surface p-5 md:p-6"
               data-reveal
             >
               <div className="mb-3 flex items-center justify-between">
@@ -190,7 +190,7 @@ export function DashboardShowcase() {
 
           {/* Transacciones recientes */}
           <div
-            className="rounded-2xl border border-outline-variant/30 bg-surface p-6"
+            className="rounded-2xl border border-outline-variant/30 bg-surface p-5 md:p-6"
             data-reveal
           >
             <div className="mb-3 flex items-center justify-between">
