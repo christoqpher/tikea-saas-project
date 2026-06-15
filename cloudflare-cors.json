@@ -2,7 +2,10 @@
   "rules": [
     {
       "allowed": {
-        "origins": ["http://localhost:3000"],
+        "origins": [
+          "http://localhost:3000",
+          "https://tikea-saas-project.netlify.app"
+        ],
         "methods": ["GET", "PUT"],
         "headers": ["*"]
       },

@@ -46,3 +46,6 @@ next-env.d.ts
 # tooling local (Claude Code)
 .claude/
 skills-lock.json
+
+# Local Netlify folder
+.netlify
